@@ -1,22 +1,21 @@
 # Supplementary annotations — MLO-Lab, ORena FOCUS 2026 SEGMENT track
 
-The two halves are distributed differently, because only one of them may be hosted at all.
+The annotations come in two halves.
 
-| half | where | access |
+| half | contents | where |
 |---|---|---|
-| public | [`Machine-Learning-Oncology/orena-segment-annotations`](https://huggingface.co/datasets/Machine-Learning-Oncology/orena-segment-annotations) | Hugging Face dataset repo |
-| private (LapChole) | **on request** | supplied directly as a 90 KB archive |
+| public | HeiCo + hernia questions, hernia sheets, hernia frames | [`Machine-Learning-Oncology/orena-segment-annotations`](https://huggingface.co/datasets/Machine-Learning-Oncology/orena-segment-annotations) |
+| private | LapChole questions and sheets | available **on request** |
 
 ```bash
-python annotations/fetch.py                       # public half from the Hub
-tar xzf orena-segment-lapchole-annotations_*.tar.gz -C annotations/private --strip-components=1
-```
+# public half
+python annotations/fetch.py
 
-**The LapChole half is not hosted anywhere.** The LapChole-FOCUS data usage agreement
-prohibits publishing any part or derivative of that dataset until the organisers release it,
-so we do not put it on the Hub even privately. It is sent directly to the challenge
-organisers, and is available to others **on request** once LapChole-FOCUS is public — at
-which point we are obliged to publish it, and will do so alongside the public half.
+# private half, once you have the archive
+mkdir -p annotations/private
+tar xzf orena-segment-lapchole-annotations_*.tar.gz \
+    -C annotations/private --strip-components=1
+```
 
 Neither half is committed to git. Rows you can rebuild: **21,440** with the public half
 alone, **23,294** adding the private half, and all **23,454** once the 160 LapChole
