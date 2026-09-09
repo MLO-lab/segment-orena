@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+logs/
+checkpoints/
+sft_export_128/
+
+# generated training exports are not committed; the released annotations under
+# annotations/ ARE
+/*.jsonl
+sft_export*/*.jsonl
+
+# The annotation DATA lives in two Hugging Face dataset repos and is fetched with
+# annotations/fetch.py. Only the code that produces and consumes it is committed.
+annotations/public/
+annotations/private/
+
+# the LapChole bundle is sent directly to the organisers -- never committed
+orena-segment-lapchole-annotations_*.tar.gz
+orena-segment-lapchole-annotations_*.tar.gz.sha256
