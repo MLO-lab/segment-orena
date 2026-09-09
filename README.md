@@ -169,9 +169,6 @@ the one submitted**.
 | `checkpoint-1464` | 2.00 | 0.1171 |
 | **`checkpoint-1466`** | **2.00** | **0.1170** |
 
-Both epochs were built and evaluated on the challenge leaderboard; epoch 2 scored higher and
-improved 7 of the 10 capability buckets over epoch 1.
-
 ## 3. Package for submission
 
 Merge the adapter from `checkpoints/$RUN_NAME/checkpoint-1466` into the base model, then
