@@ -14,28 +14,36 @@ segment_track/     SEGMENT dataset builder, collator, trainer, preflight
 slurm/             the two jobs that run the pipeline
 ```
 
-The annotation data is not committed. The public half is a Hugging Face dataset:
+The annotation data is not committed. It comes in two halves.
 
-**https://huggingface.co/datasets/Machine-Learning-Oncology/orena-segment-annotations**
+**Public** — HeiCo and hernia questions, the hernia annotation sheets, and the hernia
+frames. Published as a Hugging Face dataset:
 
 ```bash
-python annotations/fetch.py     # HeiCo + hernia questions, sheets, and hernia frames
+python annotations/fetch.py
 ```
 
-The LapChole half is **not hosted**: its data usage agreement forbids publishing any
-derivative until the organisers release LapChole-FOCUS. It goes directly to the organisers
-and is **available on request** thereafter. Unpack it into `annotations/private/` and the
-pipeline picks it up automatically.
+which downloads
+[`Machine-Learning-Oncology/orena-segment-annotations`](https://huggingface.co/datasets/Machine-Learning-Oncology/orena-segment-annotations)
+into `annotations/public/`.
 
-| you have | rows you can rebuild |
-|---|---:|
-| public only | 21,440 |
-| + private annotations | 23,294 |
-| + LapChole frame extraction (`--extra-frames`) | **23,454** (exact) |
+**Private** — the LapChole questions and sheets. Not hosted: the LapChole-FOCUS data usage
+agreement forbids publishing any derivative until the organisers release that dataset.
+Available **on request** as a small archive; unpack it into `annotations/private/`:
 
-The official 20,000 are always present; the differences are the 1,440 public and 2,014
-LapChole questions we added, of which 160 also need frames extracted from LapChole videos
-because their windows are absent from the official export.
+```bash
+mkdir -p annotations/private
+tar xzf orena-segment-lapchole-annotations_*.tar.gz \
+    -C annotations/private --strip-components=1
+```
+
+Either half is optional — the pipeline uses whatever is present. The expected layout is:
+
+```
+annotations/
+├── public/     vqa/*.jsonl, raw/hernia_mesh_annotations/, frames/, SOURCES.md
+└── private/    vqa/lapchole.jsonl, raw/lapchole_annotations/, raw/crop_boxes.json
+```
 
 See `annotations/README.md` for the schemas and the reasoning behind the split.
 
