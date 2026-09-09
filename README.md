@@ -156,12 +156,27 @@ sbatch slurm/2_train.sbatch
 The job verifies the training file exists and that every clip has `N_FRAMES` frames, then
 runs `segment_track/preflight.py`, which gates `triton>=3.7.1` and `flash-linear-attention`.
 
-The submitted model is `checkpoint-1466` (epoch 2).
+### Selected checkpoint
+
+The run saves every 366 steps and the **final checkpoint, `checkpoint-1466` (epoch 2.0), is
+the one submitted**.
+
+| checkpoint | epoch | eval_loss |
+|---|---:|---:|
+| `checkpoint-366` | 0.50 | 0.2612 |
+| `checkpoint-732` | 1.00 | 0.1897 |
+| `checkpoint-1098` | 1.50 | 0.1438 |
+| `checkpoint-1464` | 2.00 | 0.1171 |
+| **`checkpoint-1466`** | **2.00** | **0.1170** |
+
+Both epochs were built and evaluated on the challenge leaderboard; epoch 2 scored higher and
+improved 7 of the 10 capability buckets over epoch 1.
 
 ## 3. Package for submission
 
-Merge the adapter into the base model, then build the container. `N_FRAMES` in the
-container's frame sampler must equal the value used for training.
+Merge the adapter from `checkpoints/$RUN_NAME/checkpoint-1466` into the base model, then
+build the container. `N_FRAMES` in the container's frame sampler must equal the value used
+for training.
 
 ## Notes
 
