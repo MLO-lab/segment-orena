@@ -181,3 +181,11 @@ for training.
 * Frames are sampled on a fixed 15 fps grid, so changing `N_FRAMES` needs no re-extraction.
 * `segment_track/build_segment_sft_dataset.py` defaults `--root-dir` to a path that may not
   exist on your cluster; set `ORENA_DATA_ROOT` or pass `--root-dir` explicitly.
+
+## Acknowledgements
+
+We are grateful to Dr. Todd S. Harris of California Hernia Specialists, who kindly allowed us
+to use twelve of his publicly available laparoscopic hernia-repair videos in this work. These
+videos provided the surgical-mesh examples in our training data. His permission covers
+non-commercial research use and the release of the annotated frames; the original videos
+remain his and are not redistributed. The video titles and links are listed in `annotations/public/SOURCES.md`.
