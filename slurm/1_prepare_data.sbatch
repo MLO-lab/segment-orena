@@ -30,9 +30,10 @@ echo "############ 1/5  official export at ${N_FRAMES} frames ############"
 $PYTHON segment_track/build_segment_sft_dataset.py \
     --datasets heico lapchole \
     --root-dir "$ORENA_DATA_ROOT" \
-    --n-frames "$N_FRAMES" \
+    --num-frames "$N_FRAMES" \
     --out-dir "$EXPORT"
-mv "$EXPORT/all.jsonl" "$EXPORT/all_gold.jsonl"
+# all official rows (train + eval + test): the final model trains on every one of them
+cat "$EXPORT/train.jsonl" "$EXPORT/eval.jsonl" "$EXPORT/test.jsonl" > "$EXPORT/all_gold.jsonl"
 wc -l "$EXPORT/all_gold.jsonl"
 
 echo; echo "############ 2/5  derived questions from labelled tracks ############"

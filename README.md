@@ -89,8 +89,8 @@ python annotations/fetch.py --private        # or without --private
 # 1. build the official export at 128 frames from YOUR copy of FOCUS
 $PYTHON segment_track/build_segment_sft_dataset.py \
     --datasets heico lapchole --root-dir "$ORENA_DATA_ROOT" \
-    --n-frames 128 --out-dir sft_export_128
-mv sft_export_128/all.jsonl sft_export_128/all_gold.jsonl
+    --num-frames 128 --out-dir sft_export_128
+cat sft_export_128/{train,eval,test}.jsonl > sft_export_128/all_gold.jsonl
 
 # 2. merge the released questions into it
 $PYTHON segment_track/integrate_released_annotations.py \
@@ -131,7 +131,7 @@ Individual generators can also be run directly:
 $PYTHON -m segment_data.derive_segment --out segment_derived_all.jsonl
 $PYTHON -m frame_data.lapchole_segment_questions --n-frames 128 --extract
 $PYTHON -m frame_data.mesh_segment_questions --n-frames 128
-$PYTHON segment_track/build_segment_sft_dataset.py --datasets heico lapchole --n-frames 128
+$PYTHON segment_track/build_segment_sft_dataset.py --datasets heico lapchole --num-frames 128
 ```
 
 ## 2. Train
